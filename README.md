@@ -6,7 +6,7 @@ W4-PM1 | CYBERSECURITY |  NETWORKWALKS
 | **Penetration Tester** /(Cybersecurity Professional) | Jeffrey Obi |
 | :---- | :---- |
 | **Program/Batch** | B083-Networkwalks |
-| **Date** | 01 October, 2026 |
+| **Date** | 02 October, 2026 |
 | **Modules completed** | W4-PM1 (Initial Access)<br>W4-PM2 (Data Extraction)<br>W4-PM3 (Attack: Cracking)<br>W4-PM4 (Documentation) |
 | **Client/Target** | Mediroza General Hospital URL: hxxps[:]//medirozahospital[.]com |
 | **Written permission secured from target?** | Yes |
@@ -27,7 +27,7 @@ This report covers a black-box test conducted on the Mediroza General Hospital d
 
 # **3\. Tools Used**
 
-The table below lists each tool used in this report and its purpose.
+The table below lists each tool used in this project and its purpose.
 
 | Tool | Purpose |
 | :---- | :---- |
@@ -41,22 +41,22 @@ The table below lists each tool used in this report and its purpose.
 | **Zenmap (Nmap GUI)** | Scan the local subnet to find live hosts, IPs and MAC addresses. |
 | **Firefox** | Web browser used to access web-based penetration testing tools. |
 | **Hash Extractor** | Web-based PDF password hash extractor tool created and issued by Networkwalks. |
-| **Password Cracker** | Web-based password hash cracker created and issued by Networkwalks. |
+| **Password Cracker** | Web-based hash-based password cracker created and issued by Networkwalks. |
 | **SodaPDF** | PDF viewer installed on Windows machine. |
 
 # **4\. Project Phases**
 
 ## **4.1 Initial Access**
 
-I performed reconnaissance against the domain, finding related sub-domains, email addresses, technical back-end information, and registration details. I also found private but exposed portions of the domain.
+I performed reconnaissance against the domain, finding related sub-directories, email addresses, technical back-end information, and registration details. I also found private but exposed portions of the domain.
 
-## **4.2 Data Extraction**
+## **4.2 Patient Files—Data Extraction and Cracking**
 
-I located and extracted sensitive PDF files. 
+I located and extracted three sensitive patient report PDF files, then i cracked their passwords and accessed their contents.
 
-## **4.3 Attacking**
+## **4.3 Staff & Shareholder Data Extraction**
 
-I cracked the PDF passwords and gained access to their contents.
+I accessed a private database file and retrieved sensitive staff and shareholder details.
 
 ## **4.4 Reporting**
 
@@ -64,10 +64,11 @@ I prepared a professional penetration test report, using a required standard fra
 
 | \# | Risk / Finding | Evidence / Observation | Potential Impact | Risk Level |
 | :---: | ----- | ----- | ----- | :---: |
-| 1 | Back-end architectural data exposed | Wrong username guessing revealed account enumeration | Attackers may exploit the back-end  | **High** |
-| 2 | More back-end architectural data exposed | Correct username guessing revealed account enumeration | Provides exploitable information about the domain back-end | **High** |
+| 1 | Back-end architectural data exposed | Wrong and correctusername guessing revealed account enumeration | Attackers may exploit the back-end  | **High** |
+| 2 | Unsecure ports open | Ports with corresponding unencrypted protocols appear open | Provides exploitable entry points on the web server | **Medium** |
 | 3 | User authentication flaw exposed | Improper input validation, where login submission with empty password box was permitted | May ease brute-forcing attacks | **High** |
-| 4 | Restricted and sensitive records unprotected | Instructions for external crawlers revealed hidden but unprotected domains | Attackers may infiltrate the directory and steal exposed sensitive data | **High** |
+| 4 | SQL misconfiguration | SQL injection test returned a visible database error message | Attackers may infiltrate the directories and steal exposed sensitive data | **High** |
+| 5 | Restricted and sensitive records unprotected | Instructions for external crawlers revealed hidden but unprotected domains | Attackers may infiltrate the directory and steal exposed sensitive data | **High** |
 
 The risks above are observations from reconnaissance activities, not confirmed vulnerabilities. The presence of information such as a software version, IP address or DNS record does not by itself mean that the system is vulnerable. Further authorized security testing would be required to confirm any actual vulnerability.
 
@@ -78,11 +79,20 @@ Based on the observations from these activities, I recommend the following secur
 1. **Implement Unified Login Messages**  
    Configure the domain to always return a generic error message that does not pinpoint which piece of information was incorrect.
 
-2. **Implement Robust Input Validation**  
+2. **Implement Robust Input Validation and Input Sanitization**  
    Configure proper input validation to minimize the probability of success from brute-force attacks..
 
-3. **Encrypt back-end file server**  
+3. **Encrypt Back-end File Server**  
    Implement server encryption and access controls on the exposed back-end file server to significantly mitigate the theft of sensitive data.
+
+4. **Encrypt Sensitive Files on the File Server**  
+   Encrypt sensitive database files and/or their parent directories.
+
+5. **Implement Crawler Restriction Alternative to robots.txt**  
+   Deploy HTTP response tags or HTML meta tags to restrict crawler activity, preventing exposure of internal directories via robots.txt file.
+
+6. **Close all unsecure ports**  
+   Close all ports with corresponding unencrypted protocols and open only the secure ports.
 
 # **7\. Conclusion**
 
@@ -142,13 +152,11 @@ This project provided immersion into the processes of an attacker bearing the in
 
 *Figure 12: Screenshot of the **Firefox** interface showing the patients' PDF reports.*
 
-## **4.2 Data Extraction**
+## **4.2 Patient Files—Data Extraction and Cracking**
 
 ![](./images/figure13.jpg)
 
 *Figure 13: Screenshot of the **File Explorer** window showing the downloaded PDF reports.*
-
-## **4.3 Attacking**
 
 ![](./images/figure14.jpg)
 
@@ -158,9 +166,27 @@ This project provided immersion into the processes of an attacker bearing the in
 
 *Figure 15: Screenshots of the **Password Cracker** interface showing the three cracked PDF passwords.*
 
-![](./images/figure16.jpg)
+![](./images/figure16_1.jpg)
 
-*Figure 16: Screenshots of the three PDF reports showing their contents.*
+![](./images/figure16_2.jpg)
+
+![](./images/figure16_3.jpg)
+
+*Figures 16: Screenshots of the three PDF patient reports showing their contents.*
+
+## **4.3 Staff & Shareholder Data Extraction**
+
+![](./images/figure17.jpg)
+
+*Figure 17: Screenshot of the **Firefox interface** showing the "old" sub-directory.*
+
+![](./images/figure18.jpg)
+
+*Figure 18: Screenshot of the SQL database file showing the staff details including names and salaries.*
+
+![](./images/figure19.jpg)
+
+*Figure 19: Screenshot of the SQL database file showing the shareholder details.*
 
 ## **4.4 Reporting**
 
