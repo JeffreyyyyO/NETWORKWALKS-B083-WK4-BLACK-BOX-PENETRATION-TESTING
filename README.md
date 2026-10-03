@@ -7,7 +7,7 @@ W4-PM1 | CYBERSECURITY |  NETWORKWALKS
 | :---- | :---- |
 | **Program/Batch** | B083-Networkwalks |
 | **Date** | 02 October, 2026 |
-| **Modules completed** | W4-PM1 (Initial Access)<br>W4-PM2 (Patient Files—Data Extraction and Cracking)<br>W4-PM3 (Staff & Shareholder Data Extraction)<br>W4-PM4 (Reporting) |
+| **Phases completed** | 1. (Initial Access)<br>2. (Patient Files—Data Extraction and Cracking)<br>3. (Staff & Shareholder Data Extraction)<br>4. (Reporting) |
 | **Client/Target** | Mediroza General Hospital URL: hxxps[:]//medirozahospital[.]com |
 | **Written permission secured from target?** | Yes |
 | **Download Reports (PDF)** | **![Full Report](./documents/mediroza_general_hospital_black-box_penetration_testing_project_report.pdf)** <br> **![Penetration Test Report](./documents/mediroza_general_hospital_pentest_report.pdf)** <br> **![CLI Outputs](./documents/black-box_penetration_testing_project_(cli_outputs).txt)** |
